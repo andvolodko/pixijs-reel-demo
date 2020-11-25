@@ -1,0 +1,47 @@
+{
+    "pixiConfig": {
+        "width": 1280,
+        "height": 1024,
+        "backgroundColor": 1087931,
+        "resolution": 1
+    },
+    "resources": [
+        {
+            "name": "sprites1",
+            "path": "./assets/sprites.json"
+        }
+    ],
+    "view": [
+        {
+            "name": "Spin",
+            "entity": "Button",
+            "x": 1000,
+            "y": 500,
+            "sprite": "spin.png",
+            "event": "spin"
+        },
+        {
+            "name": "Reel",
+            "entity": "Reel",
+            "sprite": "icon.png",
+            "count": 3,
+            "marginX": 0,
+            "marginY": -180,
+            "x": 100,
+            "y": 0
+        },
+        {
+            "name": "Particles",
+            "entity": "Particles",
+            "sprite": "bone.png",
+            "x": 0,
+            "y": 0
+        },
+        {
+            "name": "FPS",
+            "entity": "FPS",
+            "x": 100,
+            "y": 0
+        }
+    ]
+}
