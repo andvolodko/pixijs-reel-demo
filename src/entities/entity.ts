@@ -5,6 +5,7 @@ export class Entity {
     config: any;
     engine: GameEngine;
     container: PIXI.Container = new PIXI.Container();
+    public name?: string;
 
     constructor(config: any, engine: GameEngine) {
         this.config = config;
@@ -13,6 +14,7 @@ export class Entity {
         this.init();
     }
     init() {
+        this.name = this.config.name;
         this.container.name = this.config.name;
         this.container.x = this.config.x;
         this.container.y = this.config.y;

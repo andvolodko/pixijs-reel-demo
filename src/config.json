@@ -1,9 +1,9 @@
 {
     "pixiConfig": {
-        "width": 1280,
-        "height": 700,
+        "width": 800,
+        "height": 1000,
         "backgroundColor": 1087931,
-        "resolution": 0.3
+        "resolution": 1
     },
     "resources": [
         {
@@ -30,16 +30,27 @@
             "valign": "center",
             "count": 3,
             "marginX": 0,
-            "marginY": -180,
+            "marginY": -240,
             "x": 0,
-            "y": 0
+            "y": 0,
+            "delayStart": 2000,
+            "delayEnd": 1500,
+            "velocity": 80,
+            "mask": {
+                "x": 0,
+                "y": 0,
+                "width": 500,
+                "height": 1020
+            }
         },
         {
             "name": "Particles",
             "entity": "Particles",
             "sprite": "bone.png",
-            "x": 300,
-            "y": 300
+            "halign": "center",
+            "valign": "center",
+            "x": 100,
+            "y": 100
         },
         {
             "name": "FPS",

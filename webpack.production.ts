@@ -11,18 +11,18 @@ module.exports = (env: { mode: "development" | "production" }) => {
 
         module: {
             rules: [
-                {
-                    enforce: "pre",
-                    test: /\.(js|jsx|ts|tsx)$/,
-                    exclude: /node_modules/,
-                    loader: "eslint-loader",
-                    options: {
-                        emitError: true,
-                        emitWarning: true,
-                        failOnError: true,
-                        failOnWarning: true,
-                    },
-                },
+                // {
+                //     enforce: "pre",
+                //     test: /\.(js|jsx|ts|tsx)$/,
+                //     exclude: /node_modules/,
+                //     loader: "eslint-loader",
+                //     options: {
+                //         emitError: true,
+                //         emitWarning: false,
+                //         failOnError: true,
+                //         failOnWarning: false,
+                //     },
+                // },
                 {
                     test: /\.(js|jsx|ts|tsx)$/,
                     use: [

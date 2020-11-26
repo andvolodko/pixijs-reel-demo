@@ -12,7 +12,6 @@ export class Particles extends Entity {
     constructor(config: any, engine: GameEngine) {
         super(config, engine);
         this.addEmitter();
-        this.emitStart();
     }
     addEmitter() {
         this.particlesConfig = new ParticlesConfig(this.config);
@@ -21,13 +20,14 @@ export class Particles extends Entity {
             [PIXI.Texture.from(this.config.sprite)],
             this.particlesConfig
         );
+        this.emitter.emit = false;
     }
-    emitStart() {
+    public emitStart() {
         if (this.emitter) {
             this.emitter.emit = true;
         }
     }
-    emitStop() {
+    public emitStop() {
         if (this.emitter) {
             this.emitter.emit = false;
         }
@@ -36,7 +36,6 @@ export class Particles extends Entity {
         super.update(elapsed);
         if (this.emitter) {
             this.emitter.update(elapsed);
-            //console.log(elapsed);
         }
     }
 }

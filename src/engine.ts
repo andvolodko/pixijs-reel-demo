@@ -10,10 +10,12 @@ export class GameEngine {
     viewItems: Array<Entity> = [];
     elapsed: number = Date.now();
     updateCallback?: any;
+    private callbacks: callbackbData[] = [];
 
     constructor(config: any) {
         this.config = config;
 
+        config.pixiConfig.resolution = window.devicePixelRatio;
         this.pixiApplication = new PIXI.Application(config.pixiConfig);
 
         this.parseConfig();
@@ -25,6 +27,7 @@ export class GameEngine {
     engineReady() {
         this.update();
         this.resize();
+        this.sendEvent("ready");
     }
     addListeners() {
         this.resizeCallback = this.resize.bind(this);
@@ -85,7 +88,13 @@ export class GameEngine {
         console.log("GameEngine: resize", window.innerWidth, window.innerHeight, scale);
     }
     sendEvent(event: string) {
-        console.log(event);
+        console.log("Received event: " + event);
+        for (let i = 0; i < this.callbacks.length; i++) {
+            const callbackData = this.callbacks[i];
+            if (callbackData.name === event) {
+                callbackData.callback();
+            }
+        }
     }
     update() {
         // Update the next frame
@@ -98,4 +107,26 @@ export class GameEngine {
         }
         this.elapsed = now;
     }
+    on(event: string, callback: any) {
+        this.callbacks.push({ name: event, callback: callback });
+    }
+    getEntityByName(name: string) {
+        for (let i = 0; i < this.viewItems.length; i++) {
+            const entity = this.viewItems[i];
+            console.log(entity.name, name);
+            if (entity.name === name) {
+                return entity;
+            }
+        }
+        return null;
+    }
+}
+
+interface cb {
+    (): void;
+}
+
+interface callbackbData {
+    name: string;
+    callback: cb;
 }

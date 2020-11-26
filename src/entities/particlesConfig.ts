@@ -53,13 +53,14 @@ export class ParticlesConfig implements particles.EmitterConfig {
         ]);
         this.startRotation = { min: 0, max: 360 };
         this.rotationSpeed = { min: 0, max: 150 };
-        this.lifetime = { min: 0.5, max: 0.7 };
-        this.frequency = 0.05;
-        this.emitterLifetime = 0.5;
+        this.lifetime = { min: 0.5, max: 1 };
+        this.frequency = 0.01;
+        this.emitterLifetime = 0.7;
         this.maxParticles = 1000;
         this.spawnType = "ring";
-        this.spawnCircle = { x: 0, y: 0, r: 50, minR: 30 };
+        this.spawnCircle = { x: 0, y: 0, r: 80, minR: 30 };
         this.pos = { x: 0, y: 0 };
+        this.emit = false;
     }
 }
 
