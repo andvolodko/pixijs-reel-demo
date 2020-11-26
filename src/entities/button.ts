@@ -19,7 +19,6 @@ export class Button extends Entity {
     }
     addListeners() {
         this.upListener = this.onUp.bind(this);
-        console.log(this.container);
         this.sprite.on("pointerup", this.upListener);
     }
     removeListeners() {

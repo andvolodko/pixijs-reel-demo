@@ -18,4 +18,35 @@ export class Entity {
         this.container.y = this.config.y;
         this.engine.getStage().addChild(this.container);
     }
+    update(elapsed: number) {
+        //Update
+    }
+    resize(width: number, height: number, scale: number) {
+        if (this.config.halign) {
+            switch (this.config.halign) {
+                case "left":
+                    this.container.x = 0 + this.config.x;
+                    break;
+                case "right":
+                    this.container.x = width / scale - this.container.width + this.config.x;
+                    break;
+                case "center":
+                    this.container.x = width / scale / 2 - this.container.width / 2 + this.config.x;
+                    break;
+            }
+        }
+        if (this.config.valign) {
+            switch (this.config.valign) {
+                case "top":
+                    this.container.y = 0 + this.config.y;
+                    break;
+                case "bottom":
+                    this.container.y = height / scale - this.container.height + this.config.y;
+                    break;
+                case "center":
+                    this.container.y = height / scale / 2 - this.container.height / 2 + this.config.y;
+                    break;
+            }
+        }
+    }
 }

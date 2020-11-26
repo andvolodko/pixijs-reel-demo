@@ -1,9 +1,9 @@
 {
     "pixiConfig": {
         "width": 1280,
-        "height": 1024,
+        "height": 700,
         "backgroundColor": 1087931,
-        "resolution": 1
+        "resolution": 0.3
     },
     "resources": [
         {
@@ -15,33 +15,39 @@
         {
             "name": "Spin",
             "entity": "Button",
-            "x": 1000,
-            "y": 500,
+            "x": -20,
+            "y": -20,
             "sprite": "spin.png",
-            "event": "spin"
+            "event": "spin",
+            "halign": "right",
+            "valign": "bottom"
         },
         {
             "name": "Reel",
             "entity": "Reel",
             "sprite": "icon.png",
+            "halign": "center",
+            "valign": "center",
             "count": 3,
             "marginX": 0,
             "marginY": -180,
-            "x": 100,
+            "x": 0,
             "y": 0
         },
         {
             "name": "Particles",
             "entity": "Particles",
             "sprite": "bone.png",
-            "x": 0,
-            "y": 0
+            "x": 300,
+            "y": 300
         },
         {
             "name": "FPS",
             "entity": "FPS",
-            "x": 100,
-            "y": 0
+            "halign": "left",
+            "valign": "top",
+            "x": 20,
+            "y": 20
         }
     ]
 }

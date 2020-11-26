@@ -8,15 +8,22 @@ export class GameEngine {
     resizeCallback: any;
     resourceLoadedCallback: any;
     viewItems: Array<Entity> = [];
+    elapsed: number = Date.now();
+    updateCallback?: any;
 
     constructor(config: any) {
         this.config = config;
+
         this.pixiApplication = new PIXI.Application(config.pixiConfig);
 
         this.parseConfig();
         this.loadResources();
         this.addListeners();
 
+        this.updateCallback = this.update.bind(this);
+    }
+    engineReady() {
+        this.update();
         this.resize();
     }
     addListeners() {
@@ -50,6 +57,7 @@ export class GameEngine {
     resourceLoaded() {
         console.log("GameEngine: Resources loaded");
         this.createView();
+        this.engineReady();
     }
     createView() {
         this.config.view.forEach((item: any) => {
@@ -68,9 +76,26 @@ export class GameEngine {
         );
         this.pixiApplication.stage.scale.x = scale;
         this.pixiApplication.stage.scale.y = scale;
-        console.log("GameEngine: resize");
+
+        for (let i = 0; i < this.viewItems.length; i++) {
+            const item = this.viewItems[i];
+            item.resize(window.innerWidth, window.innerHeight, scale);
+        }
+
+        console.log("GameEngine: resize", window.innerWidth, window.innerHeight, scale);
     }
     sendEvent(event: string) {
         console.log(event);
+    }
+    update() {
+        // Update the next frame
+        requestAnimationFrame(this.updateCallback);
+        const now = Date.now();
+        const lastElapsed = (now - this.elapsed) * 0.001;
+        for (let i = 0; i < this.viewItems.length; i++) {
+            const item = this.viewItems[i];
+            item.update(lastElapsed);
+        }
+        this.elapsed = now;
     }
 }

@@ -1,26 +1,42 @@
 import * as PIXI from "pixi.js";
+import particles = require("pixi-particles");
 import { Entity } from "./entity";
 import { GameEngine } from "../engine";
-import particles = require('pixi-particles');
+import { ParticlesConfig } from "../entities/particlesConfig";
 
 export class Particles extends Entity {
     config: any;
+    emitter?: particles.Emitter;
+    particlesConfig?: ParticlesConfig;
 
     constructor(config: any, engine: GameEngine) {
         super(config, engine);
         this.addEmitter();
+        this.emitStart();
     }
     addEmitter() {
-        const emitterConfig: particles.EmitterConfig = {
-            lifetime: new RandNumber(0, 1),
-            frequency: 0,
-            pos: 0
-
-        };
-        let myEmitter: particles.Emitter = new particles.Emitter(
+        this.particlesConfig = new ParticlesConfig(this.config);
+        this.emitter = new particles.Emitter(
             this.container,
             [PIXI.Texture.from(this.config.sprite)],
-            emitterConfig
+            this.particlesConfig
         );
+    }
+    emitStart() {
+        if (this.emitter) {
+            this.emitter.emit = true;
+        }
+    }
+    emitStop() {
+        if (this.emitter) {
+            this.emitter.emit = false;
+        }
+    }
+    update(elapsed: number) {
+        super.update(elapsed);
+        if (this.emitter) {
+            this.emitter.update(elapsed);
+            //console.log(elapsed);
+        }
     }
 }
